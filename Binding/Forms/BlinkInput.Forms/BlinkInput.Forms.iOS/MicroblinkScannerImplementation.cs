@@ -85,6 +85,8 @@ namespace Microblink.Forms.iOS
 
         public void ScanningFinishedWithHighResolutionImage(MBOverlayViewController overlayViewController, MBImage highResImage, MBRecognizerResultState state) 
         {
+            this.highResImage = highResImage;
+            
             if (state == MBRecognizerResultState.Uncertain) 
             {
                 overlayViewController.RecognizerRunnerViewController.PauseScanning();
