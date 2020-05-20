@@ -85,11 +85,11 @@
     <Reference Include="Xamarin.Forms.Xaml">
       <HintPath>..\packages\Xamarin.Forms.4.4.0.991640\lib\Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
-    <Reference Include="iOSBinding">
-      <HintPath>..\packages\BlinkInput.iOS.Binding.4.3.0\lib\xamarinios10\iOSBinding.dll</HintPath>
-    </Reference>
     <Reference Include="BlinkInput.Forms.Core">
       <HintPath>..\packages\BlinkInput.Forms.Core.4.3.0\lib\netstandard1.0\BlinkInput.Forms.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="iOSBinding">
+      <HintPath>..\packages\BlinkInput.iOS.Binding.4.3.0\lib\xamarinios10\iOSBinding.dll</HintPath>
     </Reference>
     <Reference Include="BlinkInput">
       <HintPath>..\packages\BlinkInput.Forms.iOS.4.3.0\lib\xamarinios10\BlinkInput.dll</HintPath>
