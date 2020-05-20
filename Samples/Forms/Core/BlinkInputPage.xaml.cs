@@ -22,6 +22,8 @@ namespace BlinkInputApp
 
         IFieldByFieldElement fieldByFieldElement;
 
+        DocumentCaptureRecognizerWrapper documentCaptureRecognizerWrapper;
+
         /// <summary>
         /// USDL recognizer will be used for scanning barcode from back side of United States' driver's licenses.
         /// </summary>
@@ -79,8 +81,16 @@ namespace BlinkInputApp
                 }
                 else
                 {
-                    resultElement = fieldByFieldCollection.FieldByFieldElements[0];
-					stringResult = "RESULT -> " + " " + "Identifier: " + resultElement.Identifier + " " + "Value: " + resultElement.Value;
+					if (fieldByFieldCollection != null)
+					{
+                        resultElement = fieldByFieldCollection.FieldByFieldElements[0];
+                        stringResult = "RESULT -> " + " " + "Identifier: " + resultElement.Identifier + " " + "Value: " + resultElement.Value;
+                    }
+					else
+					{
+                        fullDocumentFrontImageSource = documentCaptureRecognizerWrapper.DocumentCaptureRecognizer.Result.FullDocumentImage;
+                        fullDocumentBackImageSource = documentCaptureRecognizerWrapper.CapturedFullImage;
+                    }
                 }
 
                 // updating the UI must be performed on main thread
@@ -90,6 +100,7 @@ namespace BlinkInputApp
                     fullDocumentBackImage.Source = fullDocumentBackImageSource;
                     successScanImage.Source = successFrameImageSource;
                     faceImage.Source = faceImageSource;
+                    fieldByFieldCollection = null;
                 });
 
             });
@@ -123,6 +134,16 @@ namespace BlinkInputApp
             // start scanning
             blinkInput.Scan(fieldByFieldOverlaySettings);
         }
-    }
+
+		void startDocumentCaptureButton_Clicked(System.Object sender, System.EventArgs e)
+		{
+            var documentCaptureRecognizer = DependencyService.Get<IDocumentCaptureRecognizer>(DependencyFetchTarget.NewInstance);
+
+            documentCaptureRecognizerWrapper = new DocumentCaptureRecognizerWrapper(documentCaptureRecognizer);
+
+            var documentCaptureOverlaySettings = DependencyService.Get<IDocumentCaptureOverlaySettingsFactory>().CreateDocumentCaptureOverlaySettings(documentCaptureRecognizerWrapper);
+            blinkInput.Scan(documentCaptureOverlaySettings);
+        }
+	}
 }
 

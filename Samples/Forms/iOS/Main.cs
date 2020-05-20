@@ -1,6 +1,6 @@
 ﻿using UIKit;
 
-namespace BlinkIDFormsSample
+namespace BlinkInputFormsSample
 {
 	public class Application
 	{
