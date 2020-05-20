@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\Forms\BlinkInput.Forms\packages\NuGet.Build.Packaging.0.2.2\build\NuGet.Build.Packaging.props" Condition="Exists('..\Forms\BlinkInput.Forms\packages\NuGet.Build.Packaging.0.2.2\build\NuGet.Build.Packaging.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DE7ABFD3-59C1-4966-84CF-35064D54C98A}</ProjectGuid>
+    <ProjectTypeGuids>{8FFB629D-F513-41CE-95D2-7ECE97B6EEEC};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>iOSBinding</RootNamespace>
+    <AssemblyName>iOSBinding</AssemblyName>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+    <PackageId>BlinkInput.iOS.Binding</PackageId>
+    <PackageVersion>4.3.0</PackageVersion>
+    <Authors>Microblink</Authors>
+    <Owners>Microblink</Owners>
+    <PackageProjectUrl>https://github.com/blinkinput/blinkinput-xamarin</PackageProjectUrl>
+    <PackageReleaseNotes>Updated for BlinkInput iOS SDK v4.3.0:
+
+https://github.com/BlinkInput/blinkinput-ios/releases/tag/v5.4.0</PackageReleaseNotes>
+    <Summary>A small, but powerfull ID scanning library - native iOS SDK binding package.</Summary>
+    <Title>BlinkInput</Title>
+    <Description>A small, but powerfull ID scanning library - native iOS SDK binding package.</Description>
+    <ReleaseVersion>4.0.0</ReleaseVersion>
+    <PackOnBuild>true</PackOnBuild>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="Xamarin.iOS" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="packages.config" />
+    <BundleResource Include="Microblink.bundle\torchoff_pressed%402x.png" />
+    <BundleResource Include="Microblink.bundle\BlinkOCR_Ocr_general_6.1.0.strop" />
+    <BundleResource Include="Microblink.bundle\icon-ok-big-selected%402x.png" />
+    <BundleResource Include="Microblink.bundle\icon-skip%402x.png" />
+    <BundleResource Include="Microblink.bundle\torchon_pressed.png" />
+    <BundleResource Include="Microblink.bundle\icon-ok-big%402x.png" />
+    <BundleResource Include="Microblink.bundle\scan-corner-ll.png" />
+    <BundleResource Include="Microblink.bundle\icon-skip.png" />
+    <BundleResource Include="Microblink.bundle\en.strings" />
+    <BundleResource Include="Microblink.bundle\model_mrtd.zzip" />
+    <BundleResource Include="Microblink.bundle\scan-corner-ll%402x.png" />
+    <BundleResource Include="Microblink.bundle\torchon.png" />
+    <BundleResource Include="Microblink.bundle\scan-corner-ul.png" />
+    <BundleResource Include="Microblink.bundle\icon-flashlight-selected%402x.png" />
+    <BundleResource Include="Microblink.bundle\icon-ok-big.png" />
+    <BundleResource Include="Microblink.bundle\ic_flash_on%402x.png" />
+    <BundleResource Include="Microblink.bundle\arrow%402x.png" />
+    <BundleResource Include="Microblink.bundle\hr.strings" />
+    <BundleResource Include="Microblink.bundle\icon-flashlight-selected.png" />
+    <BundleResource Include="Microblink.bundle\face_detector_model.zzip" />
+    <BundleResource Include="Microblink.bundle\scan-corner-lr%402x.png" />
+    <BundleResource Include="Microblink.bundle\ic_flash_off.png" />
+    <BundleResource Include="Microblink.bundle\ic_flash_on.png" />
+    <BundleResource Include="Microblink.bundle\arrow.png" />
+    <BundleResource Include="Microblink.bundle\ic_flash_on%403x.png" />
+    <BundleResource Include="Microblink.bundle\BlinkOCR_DocumentDetector_general_6.1.0.strop" />
+    <BundleResource Include="Microblink.bundle\PPbeep.wav" />
+    <BundleResource Include="Microblink.bundle\model_arabic.zzip" />
+    <BundleResource Include="Microblink.bundle\take_picture_button%402x.png" />
+    <BundleResource Include="Microblink.bundle\scan-corner-ur%402x.png" />
+    <BundleResource Include="Microblink.bundle\icon-flashlight%402x.png" />
+    <BundleResource Include="Microblink.bundle\arrow_pressed.png" />
+    <BundleResource Include="Microblink.bundle\take_picture_button.png" />
+    <BundleResource Include="Microblink.bundle\model_micr.zzip" />
+    <BundleResource Include="Microblink.bundle\No Camera-100.png" />
+    <BundleResource Include="Microblink.bundle\torchon%402x.png" />
+    <BundleResource Include="Microblink.bundle\torchoff%402x.png" />
+    <BundleResource Include="Microblink.bundle\arrow_pressed%402x.png" />
+    <BundleResource Include="Microblink.bundle\take_picture_button%403x.png" />
+    <BundleResource Include="Microblink.bundle\torchon_pressed%402x.png" />
+    <BundleResource Include="Microblink.bundle\torchoff.png" />
+    <BundleResource Include="Microblink.bundle\ic_flash_off%402x.png" />
+    <BundleResource Include="Microblink.bundle\icon-ok-big-selected.png" />
+    <BundleResource Include="Microblink.bundle\icon-help.png" />
+    <BundleResource Include="Microblink.bundle\torchoff_pressed.png" />
+    <BundleResource Include="Microblink.bundle\icon-skip-selected.png" />
+    <BundleResource Include="Microblink.bundle\Close%403x.png" />
+    <BundleResource Include="Microblink.bundle\scan-corner-ul%402x.png" />
+    <BundleResource Include="Microblink.bundle\icon-exit.png" />
+    <BundleResource Include="Microblink.bundle\icon-skip-selected%402x.png" />
+    <BundleResource Include="Microblink.bundle\scan-corner-lr.png" />
+    <BundleResource Include="Microblink.bundle\Close%402x.png" />
+    <BundleResource Include="Microblink.bundle\model_general_blink_ocr.zzip" />
+    <BundleResource Include="Microblink.bundle\Info.plist" />
+    <BundleResource Include="Microblink.bundle\icon-help%402x.png" />
+    <BundleResource Include="Microblink.bundle\icon-flashlight.png" />
+    <BundleResource Include="Microblink.bundle\scan-corner-ur.png" />
+    <BundleResource Include="Microblink.bundle\ic_flash_off%403x.png" />
+    <BundleResource Include="Microblink.bundle\icon-exit%402x.png" />
+    <BundleResource Include="Microblink.bundle\Close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ObjcBindingApiDefinition Include="ApiDefinition.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ObjcBindingCoreSource Include="Structs.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <NativeReference Include="Microblink.framework">
+      <Kind>Framework</Kind>
+      <SmartLink>False</SmartLink>
+    </NativeReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.ObjCBinding.CSharp.targets" />
+  <Import Project="packages\NuGet.Build.Packaging.0.2.0\build\NuGet.Build.Packaging.targets" Condition="Exists('packages\NuGet.Build.Packaging.0.2.0\build\NuGet.Build.Packaging.targets')" />
+  <Import Project="..\Forms\BlinkInput.Forms\packages\NuGet.Build.Packaging.0.2.2\build\NuGet.Build.Packaging.targets" Condition="Exists('..\Forms\BlinkInput.Forms\packages\NuGet.Build.Packaging.0.2.2\build\NuGet.Build.Packaging.targets')" />
+</Project>

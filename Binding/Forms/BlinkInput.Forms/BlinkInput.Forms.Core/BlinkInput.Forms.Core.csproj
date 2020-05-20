@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.0</TargetFramework>
+    <PackOnBuild>true</PackOnBuild>
+    <PackageId>BlinkInput.Forms.Core</PackageId>
+    <PackageVersion>4.3.0</PackageVersion>
+    <Authors>Microblink</Authors>
+    <Owners>Microblink</Owners>
+    <PackageProjectUrl>https://github.com/blinkinput/blinkinput-xamarin</PackageProjectUrl>
+    <PackageReleaseNotes>Updated for BlinkID Android and iOS SDKs v4.3.0</PackageReleaseNotes>
+    <Summary>A small, but powerful ID scanning library - abstractions library for Xamarin Forms.</Summary>
+    <Title>BlinkInput</Title>
+    <Description>A small, but powerful ID scanning library - abstractions library for Xamarin Forms.</Description>
+    <ReleaseVersion>4.0.0</ReleaseVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType></DebugType>
+    <DocumentationFile>bin\Release\netstandard1.0\BlinkInput.Forms.Core.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="NuGet.Build.Packaging" Version="0.2.2" />
+    <PackageReference Include="Xamarin.Forms" Version="4.4.0.991265" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Processors\Concrete\IImageReturnProcessor.cs" />
+    <Compile Remove="Processors\IProcessor.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Processors\.DS_Store" />
+  </ItemGroup>
+</Project>
