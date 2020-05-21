@@ -1,17 +1,17 @@
 <!--<p align="center" >
-  <img src="https://raw.githubusercontent.com/BlinkID/blinkid-xamarin/design/Design/logo-microblink-xamarin.png" alt="MicroBlink" title="MicroBlink">
+  <img src="https://raw.githubusercontent.com/BlinkID/blinkiid-xamarin/design/Design/logo-microblink-xamarin.png" alt="Microblink" title="Microblink">
 </p>-->
 
-_BlinkID_ Xamarin SDK
+_BlinkInput_ Xamarin SDK
 ======================
 
-This is BlinkID Xamarin implementation based on native [iOS](https://github.com/BlinkID/blinkid-ios) and [Android](https://github.com/BlinkID/blinkid-android) BlinkID SDKs.
+This is BlinkInput Xamarin implementation based on native [iOS](https://github.com/BlinkInput/blinkinput-ios) and [Android](https://github.com/BlinkInput/blinkinput-android) BlinkInput SDKs.
 
 # Integration into Xamarin Forms project
 
-Steps for integrating BlinkID into your Xamarin Forms project:
+Steps for integrating BlinkInput into your Xamarin Forms project:
 
-1. In both your `Core`, `Droid` and `iOS` projects, add `BlinkID.Forms` NuGet package as a reference.
+1. In both your `Core`, `Droid` and `iOS` projects, add `BlinkInput.Forms` NuGet package as a reference.
 2. In your `Droid` project, update your `MainActivity.cs` in a following way:
     - update your `MainActivity` class so that it implements `Microblink.Forms.Droid.IMicroblinkScannerAndroidHostActivity`. This interface specifies 2 properties and 1 method that you must implement:
         - `HostActivity` property must return reference to current host activity.
@@ -33,7 +33,7 @@ Xamarin Forms sample app is available [here](Samples/Forms).
 
 # Integration into native Android project
 
-In your native Android project, add reference to `BlinkID.Android.Binding` NuGet package and follow the integration instructions for [BlinkID Android SDK](https://github.com/blinkid/blinkid-android).
+In your native Android project, add reference to `BlinkInput.Android.Binding` NuGet package and follow the integration instructions for [BlinkInput Android SDK](https://github.com/blinkinput/blinkinput-android).
 
 ## Native Android sample app
 
@@ -41,7 +41,7 @@ Native Android sample app is available [here](Samples/Android).
 
 # Integration into native iOS project
 
-In your native iOS project, add reference to `BlinkID.iOS.Binding` NuGet package and follow the integration instructions for [BlinkID iOS SDK](https://github.com/BlinkID/blinkid-ios).
+In your native iOS project, add reference to `BlinkInput.iOS.Binding` NuGet package and follow the integration instructions for [BlinkInput iOS SDK](https://github.com/BlinkInput/blinkinput-ios).
 
 ## Native iOS sample app
 
@@ -49,7 +49,7 @@ Native iOS sample app is available [here](Samples/iOS).
 
 # Integration via Binding projects
 
-If you do not wish to use BlinkID NuGet packages, you can directly reference binding projects in your solutions. Just make sure that following conditions are met:
+If you do not wish to use BlinkInput NuGet packages, you can directly reference binding projects in your solutions. Just make sure that following conditions are met:
 
 - all large binary files have been checked out
     - to ensure that all files have been checked out, please make sure that you have installed [Git Large File Storage](https://git-lfs.github.com/) and that you have fetched all LFS files with `git lfs pull` command.
@@ -67,9 +67,9 @@ If you do not wish to use BlinkID NuGet packages, you can directly reference bin
 
 ### Android
 
-1. Download latest AAR from [Android SDK repository](https://github.com/BlinkID/blinkid-android/blob/master/LibBlinkID.aar)
-2. Replace `Binding/Android/Jars/LibBlindID.aar` with latest AAR
-3. Open `Binding/Forms/BlinkID.Forms/BlinkID.Forms.sln` solution
+1. Download latest AAR from [Android SDK repository](https://github.com/BlinkInput/blinkinput-android/blob/master/LibBlinkInput.aar)
+2. Replace `Binding/Android/Jars/LibBlinkInput.aar` with latest AAR
+3. Open `Binding/Forms/BlinkInput.Forms/BlinkInput.Forms.sln` solution
 4. If needed, update `Transforms/Metadata.xml` in `AndroidBinding` project.
 5. Right-click the `AndroidBinding` project, select `Options`, under `NuGet Package` section select `Metadata`
 6. Update `Version` on tab `General`
@@ -78,23 +78,23 @@ If you do not wish to use BlinkID NuGet packages, you can directly reference bin
 
 ### iOS
 
-1. Download latest [MicroBlink.bundle](https://github.com/BlinkID/blinkid-ios/tree/master/MicroBlink.bundle) and [MicroBlink.framework](https://github.com/BlinkID/blinkid-ios/tree/master/MicroBlink.framework) from [iOS SDK repository](https://github.com/BlinkID/blinkid-ios)
-2. Replace `Binding/iOS/MicroBlink.bundle` and `Binding/iOS/MicroBlink.framework` with latest versions
+1. Download latest [Microblink.bundle](https://github.com/BlinkInput/blinkinput-ios/tree/master/Microblink.bundle) and [Microblink.framework](https://github.com/BlinkInput/blinkinput-ios/tree/master/Microblink.framework) from [iOS SDK repository](https://github.com/BlinkInput/blinkinput-ios)
+2. Replace `Binding/iOS/Microblink.bundle` and `Binding/iOS/Microblink.framework` with latest versions
 3. Generate new `ApiDefinitions.cs` and `StructsAndEnums.cs` with latest version of [Objective Sharpie](https://docs.microsoft.com/en-us/xamarin/cross-platform/macios/binding/objective-sharpie/get-started), but **DO NOT OVERWRITE existing `ApiDefiniton.cs` and `Structs.cs`**
-    - you can generate new `ApiDefinitions.cs` and `StructsAndEnums.cs` with following command (replace `iphoneos11.4` with latest SDK you have on your Mac):
+    - you can generate new `ApiDefinitions.cs` and `StructsAndEnums.cs` with following command (replace `iphoneos13.3` with latest SDK you have on your Mac):
 
     ```
     cd Binding/iOS
-    sharpie bind -sdk iphoneos11.4 MicroBlink.framework/Headers/MicroBlink.h -scope MicroBlink.framework/Headers -namespace Microblink -c -F .
+    sharpie bind -sdk iphoneos13.3 Microblink.framework/Headers/Microblink.h -scope Microblink.framework/Headers -namespace Microblink -c -F .
     ```
 4. Manually merge new structures from generated `StructsAndEnums.cs` into existing `Structs.cs` while fixing compile errors
     - `sharpie` generates enums with underlying types such as `nuint` or `nint` which are not supported by latest version of C# - you must replace those with `uint` or `int` types.
 5. Manually merge new API classes from generated `ApiDefinitions.cs` into existing `ApiDefinition.cs`
     - note that diff between those two files may be quite large, as `ApiDefinition.cs` has been manually edited to ensure correct compilation and correct exposure of all native SDK features. Focus only on adding new recognizers and parsers. Usually it shuold not be necessary to add other classes.
-6. Open `Binding/Forms/BlinkID.Forms/BlinkID.Forms.sln` solution
-7. From `iOSBinding` project remove `MicroBlink.bundle` and re-add it back
+6. Open `Binding/Forms/BlinkInput.Forms/BlinkInput.Forms.sln` solution
+7. From `iOSBinding` project remove `Microblink.bundle` and re-add it back
     - this will ensure that all new resources from new bundle are correctly added to the project
-    - also make sure that all resources within added `MicroBlink.bundle` have `BuildAction` set to `BundleResource`
+    - also make sure that all resources within added `Microblink.bundle` have `BuildAction` set to `BundleResource`
 8. Right-click the `iOSBinding` project, select `Options`, under `NuGet Package` section select `Metadata`
 9. Update `Version` on tab `General`
 10. Update `Release notes` on tab `Details`
@@ -103,41 +103,41 @@ If you do not wish to use BlinkID NuGet packages, you can directly reference bin
 ## Updating Xamarin Forms core and platform implementations
 
 1. Ensure that **both Android and iOS** native binding libraries have been updated as explained above
-2. Open `Binding/Forms/BlinkID.Forms/BlinkID.Forms.sln` solution
-3. Right-click the `BlinkID.Forms.Core` project, select `Options`, under `NuGet Package` section select `Metadata`
+2. Open `Binding/Forms/BlinkInput.Forms/BlinkInput.Forms.sln` solution
+3. Right-click the `BlinkInput.Forms.Core` project, select `Options`, under `NuGet Package` section select `Metadata`
 4. Update `Version` on tab `General`
 5. Update `Release notes` on tab `Details`
-6. Do the same for `BlinkID.Forms.Android`, `BlinkID.Forms.iOS` and `BlinkID.Forms.NuGet` projects
-7. in `BlinkID.Forms.Core` add interfaces for new functionality (e.g. new recognizer)
-8. add implementation for those interfaces in `BlinkID.Forms.Android` and `BlinkID.Forms.iOS` projects
-9. rebuild both `BlinkID.Forms.Core`, `BlinkID.Forms.Android` and `BlinkID.Forms.iOS` projects
+6. Do the same for `BlinkInput.Forms.Android`, `BlinkInput.Forms.iOS` and `BlinkInput.Forms.NuGet` projects
+7. in `BlinkInput.Forms.Core` add interfaces for new functionality (e.g. new recognizer)
+8. add implementation for those interfaces in `BlinkInput.Forms.Android` and `BlinkInput.Forms.iOS` projects
+9. rebuild both `BlinkInput.Forms.Core`, `BlinkInput.Forms.Android` and `BlinkInput.Forms.iOS` projects
 
 ## Creating updated NuGet packages
 
 1. Ensure that all projects have been updated as described above
     - this includes Android and iOS native binding libraries **and** Xamarin Forms core and platform implementations libraries
-2. Open `Binding/Forms/BlinkID.Forms/BlinkID.Forms.sln` solution
+2. Open `Binding/Forms/BlinkInput.Forms/BlinkInput.Forms.sln` solution
 3. Make sure `Release` build type is selected in `Visual Studio`
-4. Right-click on `BlinkID.Forms.NuGet` project and select `Create NuGet package`
+4. Right-click on `BlinkInput.Forms.NuGet` project and select `Create NuGet package`
     - all projects will be built and their respective NuGet packages will be created in their `bin/Release` folder
 5. Upload packages to [NuGet](https://www.nuget.org/)
 
 ## Android custom integration
 
-This section describes how to create your scan activity with BlinkID SDK, natively in Android and wrap it to Xamarin. For that purpose, we have prepared [AndroidCustomUI](./Samples/AndroidCustomUI) sample.
+This section describes how to create your scan activity with BlinkInput SDK, natively in Android and wrap it to Xamarin. For that purpose, we have prepared [AndroidCustomUI](./Samples/AndroidCustomUI) sample.
 
 Steps to wrap custom functionality to Xamarin:
 
 1. Implement it natively for Android - create Android library:
-    - make sure that you are not using any resources from the BlinkID Android SDK in resource files inside your library, otherwise, you will get compile errors while generating Xamarin bindings from Android library
-    - we have created [BlinkIDWrapper](./Samples/AndroidCustomUI/BindingSource/BlinkIDWrapper) Android Studio project which contains [LibBlinkIDWrapper](./Samples/AndroidCustomUI/BindingSource/BlinkIDWrapper/LibBlinkIDWrapper) Android library module with custom scan activity
+    - make sure that you are not using any resources from the BlinkInput Android SDK in resource files inside your library, otherwise, you will get compile errors while generating Xamarin bindings from Android library
+    - we have created [BlinkInputWrapper](./Samples/AndroidCustomUI/BindingSource/BlinkInputWrapper) Android Studio project which contains [LibBlinkInputWrapper](./Samples/AndroidCustomUI/BindingSource/BlinkInputWrapper/LibBlinkInputWrapper) Android library module with custom scan activity
 2. Build .aar archive from the library module:
-    - we have built `LibBlinkIDWrapper-release.aar` from our Android library module
+    - we have built `LibBlinkInputWrapper-release.aar` from our Android library module
 3. Create a new Xamarin Bindings Library for Android:
-    - add a dependency to `BlinkID.Android.Binding` nuget package
+    - add a dependency to `BlinkInput.Android.Binding` nuget package
     - add `.aar` to `Jars` folder and set the *Build Action* for `.aar` to *LibraryProjectZip*
     - we have prepared [CustomUIBinding](./Samples/AndroidCustomUI/CustomUISample/CustomUIBinding) project inside [CustomUISample](./Samples/AndroidCustomUI/CustomUISample) solution
 4. You can use the Bindings Library in the application project:
     - first, add a reference to the created Bindings Library
-    - add a dependency to `BlinkID.Android.Binding`
+    - add a dependency to `BlinkInput.Android.Binding`
     - we have prepared sample application project [CustomUIApp](./Samples/AndroidCustomUI/CustomUISample/CustomUIApp) inside [CustomUISample](./Samples/AndroidCustomUI/CustomUISample) solution
