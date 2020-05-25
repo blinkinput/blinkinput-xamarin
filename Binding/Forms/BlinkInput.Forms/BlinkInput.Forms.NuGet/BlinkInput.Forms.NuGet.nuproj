@@ -22,7 +22,7 @@
     <Summary>BlinkInput - a small, but powerful ID scanning library. Use this package in your Xamarin Forms project.</Summary>
     <PackageProjectUrl>https://github.com/blinkinput/blinkinput-xamarin</PackageProjectUrl>
     <PackageReleaseNotes>Updated for BlinkInput Android and iOS SDKs v4.3.0</PackageReleaseNotes>
-    <ReleaseVersion>4.0.0</ReleaseVersion>
+    <ReleaseVersion>4.3.0</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,7 +44,7 @@
       <Name>BlinkInput.Forms.iOS</Name>
     </ProjectReference>
     <ProjectReference Include="..\BlinkInput.Forms.Core\BlinkInput.Forms.Core.csproj">
-      <Project>{A9648E1B-2D6D-42A7-AAEC-15E5A2189CF0}</Project>
+      <Project>{6D449ABF-31CC-4503-B927-165F356BB875}</Project>
       <Name>BlinkInput.Forms.Core</Name>
     </ProjectReference>
   </ItemGroup>

@@ -12,7 +12,7 @@
     <Summary>A small, but powerful ID scanning library - abstractions library for Xamarin Forms.</Summary>
     <Title>BlinkInput</Title>
     <Description>A small, but powerful ID scanning library - abstractions library for Xamarin Forms.</Description>
-    <ReleaseVersion>4.0.0</ReleaseVersion>
+    <ReleaseVersion>4.3.0</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType></DebugType>

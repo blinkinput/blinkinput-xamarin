@@ -56,7 +56,7 @@ namespace BlinkInputApp
             }
             else
             {
-                licenseKey = "sRwAAAAeY29tLm1pY3JvYmxpbmsueGFtYXJpbi5ibGlua2lke7qv4mAhH4ywlU8/YXsbFGl/R9gKNbvPnYoH1UX6O/hI3oLNiy4HIncKKDbS2x/l1A/Gb6pcfI7q5tlKQjCdzNCT3N4k+7tbrzymTAS1Zsaud8FHo4c/U11A1UWQyB3CYLSRABio1yxxPF0XdbWwoLxXoURaXNBBQCXR5lGdBt8hugsuNWjDq2mzNMhJYPs13jJpcHj96xSQPKCuvqyal8IojhkPMAJrwLdcgXvTSDTbVVmbpfJK4UXeH1YNPa12bFqRDYf31hwx9YS6x9YB";
+                licenseKey = "sRwAAAAhY29tLm1pY3JvYmxpbmsueGFtYXJpbi5ibGlua2lucHV0ThK1QiLOa807QbLl9G4mPnYyVPTqNfuyaNMdBIoTRcsTkOr5Ux+LoDeqv01e8bf5l7bJ8hJFzdofvTzI7ecVGK8p56s0T1CHIw9+AmSITaKxF15V8ID86o/P6JOWDsKaFwSTFwN0SBuBvXGs/cdR2t+jgxFCX7ZyIlg4fFuD82TP75dPVDIbcr16sEebYw==";
             }
 
             // since DependencyService requires implementations to have default constructor, a factory is needed
@@ -115,24 +115,28 @@ namespace BlinkInputApp
         void StartScan (object sender, EventArgs e)
         {
             var rawParser = DependencyService.Get<IRawParser>(DependencyFetchTarget.NewInstance);
-
             fieldByFieldElement = DependencyService.Get<IFieldByFieldElement>(DependencyFetchTarget.NewInstance);
-            fieldByFieldElement.Identifier = "Raw";
-            fieldByFieldElement.LocalizedTitle = "Raw Text";
-            fieldByFieldElement.LocalizedTooltip = "Scan text";
-			fieldByFieldElement.Parser = rawParser;
+
+            var isNull = DependencyService.Get<IFieldByFieldElement>(DependencyFetchTarget.NewInstance) == null;
+            var isNullStr = isNull.ToString();
+            Console.WriteLine(isNullStr);
+
+            //fieldByFieldElement.Identifier = "Raw";
+            //fieldByFieldElement.LocalizedTitle = "Raw Text";
+            //fieldByFieldElement.LocalizedTooltip = "Scan text";
+            //fieldByFieldElement.Parser = rawParser;
 
             // license keys must be set before creating Recognizer, othervise InvalidLicenseKeyException will be thrown
             // the following code creates and sets up implementation of MrtdRecognizer
-            fieldByFieldCollection = DependencyService.Get<IFieldByFieldCollectionFactory>().CreateFieldByFieldCollection(fieldByFieldElement);
+            //fieldByFieldCollection = DependencyService.Get<IFieldByFieldCollectionFactory>().CreateFieldByFieldCollection(fieldByFieldElement);
 
             // using recognizerCollection, create overlay settings that will define the UI that will be used
             // there are several available overlay settings classes in Microblink.Forms.Core.Overlays namespace
             // document overlay settings is best for scanning identity documents
-            var fieldByFieldOverlaySettings = DependencyService.Get<IFieldByFieldOverlaySettingsFactory>().CreateFieldByFieldOverlaySettings(fieldByFieldCollection);
+            //var fieldByFieldOverlaySettings = DependencyService.Get<IFieldByFieldOverlaySettingsFactory>().CreateFieldByFieldOverlaySettings(fieldByFieldCollection);
 
             // start scanning
-            blinkInput.Scan(fieldByFieldOverlaySettings);
+            //blinkInput.Scan(fieldByFieldOverlaySettings);
         }
 
 		void startDocumentCaptureButton_Clicked(System.Object sender, System.EventArgs e)
