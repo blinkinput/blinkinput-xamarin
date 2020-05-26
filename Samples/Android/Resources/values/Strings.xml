@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="hello">Start scanning!</string>
-	<string name="app_name">BlinkID Xamarin</string>
+	<string name="hello">Scan QR code</string>
+	<string name="app_name">BlinkInput Xamarin</string>
 </resources>
