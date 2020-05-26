@@ -1,7 +1,6 @@
 ﻿using System;
 using Microblink.Forms.Droid.Parsers;
 using Microblink.Forms.Core.Parsers;
-using NativeFieldByFieldElement = Com.Microblink.Entities.Parsers.Config.Fieldbyfield.FieldByFieldElement;
 
 [assembly: Xamarin.Forms.Dependency(typeof(FieldByFieldElement))]
 namespace Microblink.Forms.Droid.Parsers
