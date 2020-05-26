@@ -89,7 +89,6 @@ https://github.com/BlinkInput/BlinkInput-ios/releases/tag/v4.3.0</PackageRelease
     <Compile Include="Overlays/Implementations/DocumentCaptureOverlaySettings.cs" />
     <Compile Include="Overlays/Implementations/FieldByFieldOverlaySettings.cs" />
     <Compile Include="Overlays/Implementations/BarcodeOverlaySettings.cs" />
-    <Compile Include="Properties/AssemblyInfo.cs" />
     <Compile Include="Recognizers/Recognizer.cs" />
     <Compile Include="Recognizers/RecognizerCollection.cs" />
     <Compile Include="Recognizers/Utils.cs" />
