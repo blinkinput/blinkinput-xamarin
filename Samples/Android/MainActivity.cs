@@ -5,7 +5,6 @@ using Android.Content.PM;
 
 using Android.Content;
 
-using Com.Microblink.Entities.Recognizers.Blinkid.Generic;
 using Com.Microblink.Entities.Recognizers;
 using Com.Microblink.Util;
 using Com.Microblink;
@@ -20,12 +19,8 @@ namespace Android
     {
         const int ACTIVITY_REQUEST_ID = 101;
 
-        // BlinkIdCombinedRecognizer is used for automatic classification and data extraction from the supported
-        // document
-        BlinkIdCombinedRecognizer blinkidRecognizer;
-
         // there are plenty of recognizers available - see Android documentation
-        // for more information: https://github.com/BlinkID/blinkid-android/blob/master/README.md
+        // for more information: https://github.com/BlinkInput/blinkinput-android/blob/master/README.md
 
         // RecognizerBundle is required for transferring recognizers via Intent to another activity
         // and for loading results from them back.
@@ -48,18 +43,12 @@ namespace Android
             if (RecognizerCompatibility.GetRecognizerCompatibilityStatus(this) != RecognizerCompatibilityStatus.RecognizerSupported)
             {
                 button.Enabled = false;
-                Toast.MakeText(this, "BlinkID is not supported!", ToastLength.Long).Show();
+                Toast.MakeText(this, "BlinkInput is not supported!", ToastLength.Long).Show();
             }
             else
             {
                 button.Click += delegate {
-                    // create a settings object for activity that will be used. For ID it's best to
-                    // use DocumentUISettings. There are also other UI settings available - check Android documentation
-                    var blinkidUISettings = new BlinkIdUISettings(recognizerBundle);
-
-                    // start activity associated with given UI settings. After scanning completes,
-                    // OnActivityResult will be invoked
-                    ActivityRunner.StartActivityForResult(this, ACTIVITY_REQUEST_ID, blinkidUISettings);
+               
                 };
             }
         }
@@ -67,19 +56,12 @@ namespace Android
         private void initBlinkId()
         {
             // set license key for Android with package name com.microblink.xamarin.blinkid
-            MicroblinkSDK.SetLicenseKey("sRwAAAAeY29tLm1pY3JvYmxpbmsueGFtYXJpbi5ibGlua2lke7qv4mAhH4ywlU8/YXsbFGl/R9gKNbvPnYoH1UX6O/hI3oLNiy4HIncKKDbS2x/l1A/Gb6pcfI7q5tlKQjCdzNCT3N4k+7tbrzymTAS1Zsaud8FHo4c/U11A1UWQyB3CYLSRABio1yxxPF0XdbWwoLxXoURaXNBBQCXR5lGdBt8hugsuNWjDq2mzNMhJYPs13jJpcHj96xSQPKCuvqyal8IojhkPMAJrwLdcgXvTSDTbVVmbpfJK4UXeH1YNPa12bFqRDYf31hwx9YS6x9YB", this);
+            MicroblinkSDK.SetLicenseKey("sRwAAAAhY29tLm1pY3JvYmxpbmsueGFtYXJpbi5ibGlua2lucHV0ThK1QiLOa807QbLl9G4mPnYyVPTqNfuyaNMdBIoTRcsTkOr5Ux+LoDeqv01e8bf5l7bJ8hJFzdofvTzI7ecVGK8p56s0T1CHIw9+AmSITaKxF15V8ID86o/P6JOWDsKaFwSTFwN0SBuBvXGs/cdR2t+jgxFCX7ZyIlg4fFuD82TP75dPVDIbcr16sEebYw==", this);
 
             // Since we plan to transfer large data between activities, we need to enable
             // PersistedOptimised intent data transfer mode.
             // for more information about transfer mode, check android documentation: https://github.com/blinkid/blinkid-android#-passing-recognizer-objects-between-activities
             MicroblinkSDK.IntentDataTransferMode = IntentDataTransferMode.PersistedOptimised;
-
-            // create recognizers and bundle them into RecognizerBundle
-            blinkidRecognizer = new BlinkIdCombinedRecognizer();
-            blinkidRecognizer.SetReturnFullDocumentImage(true);
-            blinkidRecognizer.SetReturnFaceImage(true);
-
-            recognizerBundle = new RecognizerBundle(blinkidRecognizer);
         }
 
         protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
@@ -96,71 +78,14 @@ namespace Android
                 // of AAR loses the return type of the Java's GetResult method. Therefore, a cast is required.
                 // This is always a safe cast, since the original object in Java is of correct type - type
                 // information was lost during conversion to C# due to https://github.com/xamarin/java.interop/pull/216
-                var blinkidResult = (BlinkIdCombinedRecognizer.Result)blinkidRecognizer.GetResult();
+                //var blinkidResult = (BlinkIdCombinedRecognizer.Result)blinkidRecognizer.GetResult();
                 // var mrtdResult = (MrtdRecognizer.Result)mrtdRecognizer.GetResult();
 
 
                 var message = "";
 
-                // we can check ResultState property of the Result to see if the result contains scanned information
-                if (blinkidResult.ResultState == Recognizer.Result.State.Valid)
-                {
-                    message += "BlinkID recognizer result:\n" +
-                        "FirstName: " + blinkidResult.FirstName + "\n" +
-                        "LastName: " + blinkidResult.LastName + "\n" +
-                        "Address: " + blinkidResult.Address + "\n" +
-                        "DocumentNumber: " + blinkidResult.DocumentNumber + "\n" +
-                        "Sex: " + blinkidResult.Sex + "\n";
-                    var dob = blinkidResult.DateOfBirth.Date;
-                    if (dob != null)
-                    {
-                        message +=
-                            "DateOfBirth: " + dob.Day + "." +
-                                              dob.Month + "." +
-                                              dob.Year + ".\n";
-                    }
-                    var doi = blinkidResult.DateOfIssue.Date;
-                    if (doi != null)
-                    {
-                        message +=
-                            "DateOfIssue: " + doi.Day + "." +
-                                              doi.Month + "." +
-                                              doi.Year + ".\n";
-
-                    }
-                    var doe = blinkidResult.DateOfExpiry.Date;
-                    if (doe != null)
-                    {
-                        message +=
-                            "DateOfExpiry: " + doe.Day + "." +
-                                               doe.Month + "." +
-                                               doe.Year + ".\n";
-
-                    }
-                    // there are other fields to extract
-
-                    // show full document images
-                    if (blinkidResult.FullDocumentFrontImage != null)
-                    {
-                        documentImageFrontView.SetImageBitmap(blinkidResult.FullDocumentFrontImage.ConvertToBitmap());
-                    }
-                    else
-                    {
-                        documentImageFrontView.SetImageResource(0);
-                    }
-                    if (blinkidResult.FullDocumentBackImage != null)
-                    {
-                        documentImageBackView.SetImageBitmap(blinkidResult.FullDocumentBackImage.ConvertToBitmap());
-                    }
-                    else
-                    {
-                        documentImageBackView.SetImageResource(0);
-                    }
-
-                }
-
                 AlertDialog.Builder alert = new AlertDialog.Builder(this);
-                alert.SetTitle("BlinkID Results");
+                alert.SetTitle("BlinkInput Results");
                 alert.SetPositiveButton("OK", (senderAlert, args) => { });
                 alert.SetMessage(message);
                 alert.Show();

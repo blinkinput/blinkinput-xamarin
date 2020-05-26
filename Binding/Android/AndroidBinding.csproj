@@ -15,18 +15,18 @@
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
     <AndroidClassParser>class-parse</AndroidClassParser>
     <PackageId>BlinkInput.Android.Binding</PackageId>
-    <PackageVersion>5.4.0</PackageVersion>
+    <PackageVersion>4.3.0</PackageVersion>
     <Authors>Microblink</Authors>
     <Owners>Microblink</Owners>
     <PackageProjectUrl>https://github.com/BlinkInput/BlinkInput-xamarin</PackageProjectUrl>
     <PackageReleaseNotes>Updated to BlinkInput Android SDK v4.3.0
 
 https://github.com/BlinkInput/BlinkInput-android/releases/tag/v4.3.0</PackageReleaseNotes>
-    <Summary>A small, but powerful ID scanning library - native Android SDK binding package.</Summary>
+    <Summary>BlinkInput Xamarin - native Android SDK binding package.</Summary>
     <Title>BlinkInput</Title>
-    <Description>A small, but powerful ID scanning library - native Android SDK binding package.</Description>
-    <ReleaseVersion>4.0.0</ReleaseVersion>
+    <Description>BlinkInput Xamarin -native Android SDK binding package.</Description>
     <PackOnBuild>true</PackOnBuild>
+    <ReleaseVersion>4.3.0</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
