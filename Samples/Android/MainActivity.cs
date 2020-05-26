@@ -11,10 +11,11 @@ using Com.Microblink;
 using Com.Microblink.Intent;
 using Com.Microblink.Uisettings;
 using Android.Runtime;
+using Com.Microblink.Entities.Recognizers.Blinkbarcode.Barcode;
 
 namespace Android
 {
-    [Activity(Label = "BlinkID Xamarin", MainLauncher = true, Icon = "@mipmap/icon", HardwareAccelerated = true)]
+    [Activity(Label = "BlinkInput Xamarin", MainLauncher = true, Icon = "@mipmap/icon", HardwareAccelerated = true)]
     public class MainActivity : Activity
     {
         const int ACTIVITY_REQUEST_ID = 101;
@@ -25,6 +26,7 @@ namespace Android
         // RecognizerBundle is required for transferring recognizers via Intent to another activity
         // and for loading results from them back.
         RecognizerBundle recognizerBundle;
+        private BarcodeRecognizer barcodeRecognizer;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -36,10 +38,10 @@ namespace Android
 
             Button button = FindViewById<Button>(Resource.Id.startScanningButton);
 
-            // Setup BlinkID before usage
-            initBlinkId();
+            // Setup BlinkInput before usage
+            InitBlinkInput();
 
-            // check if BlinkID is supported on current device. Device needs to have camera with autofocus.
+            // check if BlinkInput is supported on current device. Device needs to have camera with autofocus.
             if (RecognizerCompatibility.GetRecognizerCompatibilityStatus(this) != RecognizerCompatibilityStatus.RecognizerSupported)
             {
                 button.Enabled = false;
@@ -48,20 +50,27 @@ namespace Android
             else
             {
                 button.Click += delegate {
-               
+                    var barcodeUISettings = new BarcodeUISettings(recognizerBundle);
+
+                    // start activity associated with given UI settings. After scanning completes,
+                    // OnActivityResult will be invoked
+                    ActivityRunner.StartActivityForResult(this, ACTIVITY_REQUEST_ID, barcodeUISettings);
                 };
             }
         }
 
-        private void initBlinkId()
+        private void InitBlinkInput()
         {
-            // set license key for Android with package name com.microblink.xamarin.blinkid
             MicroblinkSDK.SetLicenseKey("sRwAAAAhY29tLm1pY3JvYmxpbmsueGFtYXJpbi5ibGlua2lucHV0ThK1QiLOa807QbLl9G4mPnYyVPTqNfuyaNMdBIoTRcsTkOr5Ux+LoDeqv01e8bf5l7bJ8hJFzdofvTzI7ecVGK8p56s0T1CHIw9+AmSITaKxF15V8ID86o/P6JOWDsKaFwSTFwN0SBuBvXGs/cdR2t+jgxFCX7ZyIlg4fFuD82TP75dPVDIbcr16sEebYw==", this);
 
             // Since we plan to transfer large data between activities, we need to enable
             // PersistedOptimised intent data transfer mode.
-            // for more information about transfer mode, check android documentation: https://github.com/blinkid/blinkid-android#-passing-recognizer-objects-between-activities
+            // for more information about transfer mode, check android documentation: https://github.com/blinkinput/blinkinput-android#-passing-recognizer-objects-between-activities
             MicroblinkSDK.IntentDataTransferMode = IntentDataTransferMode.PersistedOptimised;
+
+            barcodeRecognizer = new BarcodeRecognizer();
+            barcodeRecognizer.SetScanQrCode(true);
+            recognizerBundle = new RecognizerBundle(barcodeRecognizer);
         }
 
         protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
@@ -69,20 +78,12 @@ namespace Android
             base.OnActivityResult(requestCode, resultCode, data);
             if (requestCode == ACTIVITY_REQUEST_ID && resultCode == Result.Ok)
             {
-
-                // obtain image view that will display image of the document
-                ImageView documentImageFrontView = this.FindViewById<ImageView>(Resource.Id.documentImageFrontView);
-                ImageView documentImageBackView = this.FindViewById<ImageView>(Resource.Id.documentImageBackView);
-
                 // unfortunately, C# does not support covariant return types, so binding
                 // of AAR loses the return type of the Java's GetResult method. Therefore, a cast is required.
                 // This is always a safe cast, since the original object in Java is of correct type - type
                 // information was lost during conversion to C# due to https://github.com/xamarin/java.interop/pull/216
-                //var blinkidResult = (BlinkIdCombinedRecognizer.Result)blinkidRecognizer.GetResult();
-                // var mrtdResult = (MrtdRecognizer.Result)mrtdRecognizer.GetResult();
-
-
-                var message = "";
+                var result = (BarcodeRecognizer.Result)barcodeRecognizer.GetResult();
+                var message = result.StringData;
 
                 AlertDialog.Builder alert = new AlertDialog.Builder(this);
                 alert.SetTitle("BlinkInput Results");
