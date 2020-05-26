@@ -49,10 +49,10 @@ namespace BlinkInputApp
             // your Droid/iOS projects
             string licenseKey;
 
-            // both these license keys are demo license keys for bundleID/applicationID com.microblink.xamarin.blinkid
+            // both these license keys are demo license keys for bundleID/applicationID com.microblink.xamarin.blinkinput
             if (Device.RuntimePlatform == Device.iOS)
             {
-                licenseKey = "sRwAAAEeY29tLm1pY3JvYmxpbmsueGFtYXJpbi5ibGlua2lks3unDF2B9jpa6O+DxWD585yr5k1Kiduix24cAYzmswoh+BfKxH8AOU4sg1PduXcg6+9u3izJKkxlYU61+BVboSq4pzlfnBb8OelIJbFJ5btcTvaG5u2X2lt88dsUH2PmBUPEwBR1AwIHAJdyUq1sqabbMHAadFscU9FnXxKkSXrBer6x7UsRMHA6ULcwaw==";
+                licenseKey = "sRwAAAEhY29tLm1pY3JvYmxpbmsueGFtYXJpbi5ibGlua2lucHV0nQTDQAl4ZhU14Vz0g/pqe9DXYHPmVxK2PMxh1GVTtooenkkGwpeQQ0tQDzqAFbvKPCWrgivNeY7tRkq2IUOdnvrhaea5cfDCSazxegeLudGV/QvNcl5OCk+wupGwnzNtz3P8PVJ7q7TjXrF8skeRDWOowlsGCyHXCF3N3fCeA8mIq0nTXEYhD400l9bZPg==";
             }
             else
             {
