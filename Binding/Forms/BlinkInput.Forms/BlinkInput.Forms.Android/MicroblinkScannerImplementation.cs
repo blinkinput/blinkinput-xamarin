@@ -13,6 +13,9 @@ using Android.Content;
 using Microblink.Forms.Droid.Recognizers;
 using Com.Microblink.Intent;
 using System;
+using Microblink.Forms.Core.Parsers;
+using Microblink.Forms.Droid.Parsers;
+using Com.Microblink.Entities.Parsers.Config.Fieldbyfield;
 
 [assembly: Xamarin.Forms.Dependency(typeof(MicroblinkScannerFactoryImplementation))]
 namespace Microblink.Forms.Droid
@@ -49,6 +52,8 @@ namespace Microblink.Forms.Droid
         RecognizerBundle recognizerBundle;
         DocumentCaptureRecognizerTransferable documentCaptureRecognizerTransferable;
         DocumentCaptureRecognizerWrapper documentCaptureRecognizerWrapper;
+        IFieldByFieldCollection fieldByFieldCollection;
+        FieldByFieldBundle fieldByFieldBundle;
 
         public MicroblinkScannerImplementation(string licenseKey, string licensee, bool showTimeLimitedLicenseWarning, IMicroblinkScannerAndroidHostActivity androidHostActivity) 
         {
@@ -82,6 +87,14 @@ namespace Microblink.Forms.Droid
                         var capturedFullImage = documentCaptureRecognizerTransferable.CapturedFullImage;
                         documentCaptureRecognizerWrapper.CapturedFullImage = capturedFullImage != null ? Utils.ConvertAndroidBitmap(capturedFullImage.Image.ConvertToBitmap()) : null;
                     }
+                    if (fieldByFieldBundle != null) {
+                        fieldByFieldBundle.LoadFromIntent(data);
+                        var scanElements = fieldByFieldBundle.GetElements();
+                        for (int i = 0; i < scanElements.Length; ++i)
+                        {
+                            fieldByFieldCollection.FieldByFieldElements[i].Value = scanElements[i].Parser.GetResult().ToString();
+                        }
+                    }
                     MessagingCenter.Send(new Messages.ScanningDoneMessage { ScanningCancelled = false }, Messages.ScanningDoneMessageId);
                 } 
                 else
@@ -93,26 +106,33 @@ namespace Microblink.Forms.Droid
 
         public void Scan(IOverlaySettings overlaySettings)
         {
+            recognizerBundle = null;
+            documentCaptureRecognizerTransferable = null;
+            documentCaptureRecognizerWrapper = null;
+            fieldByFieldCollection = null;
+            fieldByFieldBundle = null;
+
             androidHostActivity.ScanningStarted(this);
             var aOverlaySettings = (OverlaySettings)overlaySettings;
             if (aOverlaySettings is DocumentCaptureOverlaySettings)
             {
-                recognizerBundle = null;
                 documentCaptureRecognizerTransferable = ((DocumentCaptureUISettings)aOverlaySettings.NativeUISettings).DocumentCaptureRecognizerTransferable;
                 documentCaptureRecognizerWrapper = ((DocumentCaptureOverlaySettings)aOverlaySettings).DocumentCaptureRecognizerWrapper;
                 ActivityRunner.StartActivityForResult(androidHostActivity.HostActivity, androidHostActivity.ScanActivityRequestCode, ((OverlaySettings)overlaySettings).NativeUISettings);
                 return;
             }
             if (aOverlaySettings is FieldByFieldOverlaySettings) {
-                recognizerBundle = null;
-                ActivityRunner.StartActivityForResult(androidHostActivity.HostActivity, androidHostActivity.ScanActivityRequestCode, ((OverlaySettings)overlaySettings).NativeUISettings);
+                var fieldByFieldOverlaySettings = (FieldByFieldOverlaySettings)aOverlaySettings;
+                fieldByFieldCollection = fieldByFieldOverlaySettings.FieldByFieldCollection;
+                var nativeOverlay = (FieldByFieldUISettings)fieldByFieldOverlaySettings.NativeUISettings;
+                fieldByFieldBundle = nativeOverlay.FieldByFieldBundle;
+
+                ActivityRunner.StartActivityForResult(androidHostActivity.HostActivity, androidHostActivity.ScanActivityRequestCode, nativeOverlay);
                 return;
             }
 
-            // assume given recognizerColelction was also used for constructing overlaySettings
+            // assume given recognizerCollection was also used for constructing overlaySettings
             recognizerBundle = ((RecognizerCollection)((RecognizerCollectionOverlaySettings)aOverlaySettings).RecognizerCollection).NativeRecognizerBundle;
-            documentCaptureRecognizerTransferable = null;
-            documentCaptureRecognizerWrapper = null;
             ActivityRunner.StartActivityForResult(androidHostActivity.HostActivity, androidHostActivity.ScanActivityRequestCode, ((OverlaySettings)overlaySettings).NativeUISettings);
         }
     }
