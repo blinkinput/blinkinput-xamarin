@@ -117,26 +117,22 @@ namespace BlinkInputApp
             var rawParser = DependencyService.Get<IRawParser>(DependencyFetchTarget.NewInstance);
             fieldByFieldElement = DependencyService.Get<IFieldByFieldElement>(DependencyFetchTarget.NewInstance);
 
-            var isNull = DependencyService.Get<IFieldByFieldElement>(DependencyFetchTarget.NewInstance) == null;
-            var isNullStr = isNull.ToString();
-            Console.WriteLine(isNullStr);
-
-            //fieldByFieldElement.Identifier = "Raw";
-            //fieldByFieldElement.LocalizedTitle = "Raw Text";
-            //fieldByFieldElement.LocalizedTooltip = "Scan text";
-            //fieldByFieldElement.Parser = rawParser;
+            fieldByFieldElement.Identifier = "Raw";
+            fieldByFieldElement.LocalizedTitle = "Raw Text";
+            fieldByFieldElement.LocalizedTooltip = "Scan text";
+            fieldByFieldElement.Parser = rawParser;
 
             // license keys must be set before creating Recognizer, othervise InvalidLicenseKeyException will be thrown
             // the following code creates and sets up implementation of MrtdRecognizer
-            //fieldByFieldCollection = DependencyService.Get<IFieldByFieldCollectionFactory>().CreateFieldByFieldCollection(fieldByFieldElement);
+            fieldByFieldCollection = DependencyService.Get<IFieldByFieldCollectionFactory>().CreateFieldByFieldCollection(fieldByFieldElement);
 
             // using recognizerCollection, create overlay settings that will define the UI that will be used
             // there are several available overlay settings classes in Microblink.Forms.Core.Overlays namespace
             // document overlay settings is best for scanning identity documents
-            //var fieldByFieldOverlaySettings = DependencyService.Get<IFieldByFieldOverlaySettingsFactory>().CreateFieldByFieldOverlaySettings(fieldByFieldCollection);
+            var fieldByFieldOverlaySettings = DependencyService.Get<IFieldByFieldOverlaySettingsFactory>().CreateFieldByFieldOverlaySettings(fieldByFieldCollection);
 
             // start scanning
-            //blinkInput.Scan(fieldByFieldOverlaySettings);
+            blinkInput.Scan(fieldByFieldOverlaySettings);
         }
 
 		void startDocumentCaptureButton_Clicked(System.Object sender, System.EventArgs e)

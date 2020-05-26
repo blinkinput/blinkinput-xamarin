@@ -21,13 +21,13 @@
     <Summary>A state-of-the-art OCR module for mobile devicesy - Android implementation for Xamarin Forms.</Summary>
     <Title>BlinkInput</Title>
     <Description>A state-of-the-art OCR module for mobile devices - Android implementation for Xamarin Forms.</Description>
-    <ReleaseVersion>4.3.0</ReleaseVersion>
     <PackOnBuild>true</PackOnBuild>
     <PackageReleaseNotes>Updated for BlinkInput Android SDK v4.3.0
 
 https://github.com/BlinkInput/blinkinput-android/releases/tag/v4.3.0</PackageReleaseNotes>
     <!-- Workaround for build error  -->
     <DesignTimeBuild>false</DesignTimeBuild>
+    <ReleaseVersion>4.3.0</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
