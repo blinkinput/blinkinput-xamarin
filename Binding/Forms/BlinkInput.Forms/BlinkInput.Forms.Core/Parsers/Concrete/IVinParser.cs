@@ -1,7 +1,7 @@
 ﻿namespace Microblink.Forms.Core.Parsers
 {
     /// <summary>
-    /// Parser that can parse VIN numbers (Vehicle identification numbers).
+    /// VinParser is used for parsing VIN numbers
     /// </summary>
     public interface IVinParser : IParser
     {
@@ -19,7 +19,7 @@
     public interface IVinParserResult : IParserResult {
         
         /// <summary>
-        /// Parsed VIN (Vehicle Identification Number). 
+        /// Returns the recognized VIN number or empty string if recognition failed. 
         /// </summary>
         string Vin { get; }
         

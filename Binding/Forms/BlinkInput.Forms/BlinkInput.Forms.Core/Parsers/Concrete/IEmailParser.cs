@@ -1,7 +1,7 @@
 ﻿namespace Microblink.Forms.Core.Parsers
 {
     /// <summary>
-    /// Parser that can parse e-mail addresses from OCR result.
+    /// EmailParser is used for parsing emails
     /// </summary>
     public interface IEmailParser : IParser
     {
@@ -19,7 +19,7 @@
     public interface IEmailParserResult : IParserResult {
         
         /// <summary>
-        /// Parsed e-mail address. 
+        /// Returns the recognized email or empty string if recognition failed. 
         /// </summary>
         string Email { get; }
         

@@ -1,7 +1,7 @@
 ﻿namespace Microblink.Forms.Core.Parsers
 {
     /// <summary>
-    /// Parser that can parse license plate content from OCR result.
+    /// LicensePlatesParser is used for parsing license plates
     /// </summary>
     public interface ILicensePlatesParser : IParser
     {
@@ -19,7 +19,7 @@
     public interface ILicensePlatesParserResult : IParserResult {
         
         /// <summary>
-        /// Parsed license plate string. 
+        /// Returns the recognized license plate number or empty string if recognition failed. 
         /// </summary>
         string LicensePlate { get; }
         

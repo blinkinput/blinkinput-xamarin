@@ -1,13 +1,15 @@
 ﻿namespace Microblink.Forms.Core.Parsers
 {
     /// <summary>
-    /// A parser that can extract IBAN (International Bank Account Number) from OCR result.
+    /// AmountParser that can extract IBAN (International Bank Account Number) from OCR result.
     /// </summary>
     public interface IIbanParser : IParser
     {
         
         /// <summary>
-        /// Should prefix (country code) always be returned. 
+        /// Should prefix (country code) always be returned.
+        /// 
+        ///  
         ///
         /// By default, this is set to 'false'
         /// </summary>
@@ -26,7 +28,7 @@
     public interface IIbanParserResult : IParserResult {
         
         /// <summary>
-        /// Parsed IBAN (International Bank Account Number). 
+        /// Returns the rparsed IBAN or empty string if recognition failed. 
         /// </summary>
         string Iban { get; }
         

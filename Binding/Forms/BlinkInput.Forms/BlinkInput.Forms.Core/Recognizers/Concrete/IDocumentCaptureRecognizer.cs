@@ -1,34 +1,46 @@
 ﻿namespace Microblink.Forms.Core.Recognizers
 {
     /// <summary>
-    /// A generic document capture recognizer.
+    /// A recognizer for DocumentCaptureRecognizer
     /// </summary>
     public interface IDocumentCaptureRecognizer : IRecognizer
     {
         
         /// <summary>
-        /// The extension factors for full document image. 
+        /// Image extension factors for full document image.
+        /// 
+        /// @see ImageExtensionFactors
+        ///  
         ///
-        /// By default, this is set to '[0.0, 0.0, 0.0, 0.0]'
+        /// By default, this is set to '{0.0f, 0.0f, 0.0f, 0.0f}'
         /// </summary>
         IImageExtensionFactors FullDocumentImageExtensionFactors { get; set; }
         
         /// <summary>
-        /// Defines minimum document scale calculated as ratio of minimal document dimension and minimal 
+        /// Defines minimum document scale calculated as ratio of minimal document dimension and minimal dimension of the input image.
+        /// 
+        ///  
         ///
         /// By default, this is set to '0.5'
         /// </summary>
         float MinDocumentScale { get; set; }
         
         /// <summary>
-        /// Minimum number of stable detections required for detection to be successful. 
+        /// Defines how many times the same document should be detected before the detector
+        /// returns this document as a result of the deteciton
+        /// 
+        /// Higher number means more reliable detection, but slower processing
+        /// 
+        ///  
         ///
-        /// By default, this is set to '2'
+        /// By default, this is set to '3'
         /// </summary>
         uint NumStableDetectionsThreshold { get; set; }
         
         /// <summary>
-        /// Defines whether full document image will be available in 
+        /// Sets whether full document image of ID card should be extracted.
+        /// 
+        ///  
         ///
         /// By default, this is set to 'false'
         /// </summary>
@@ -47,12 +59,12 @@
     public interface IDocumentCaptureRecognizerResult : IRecognizerResult {
         
         /// <summary>
-        /// The location of captured document in coordinate system of image in which detection was performed. 
+        /// Quadrangle represeting corner points of location of the captured document 
         /// </summary>
         IQuadrilateral DetectionLocation { get; }
         
         /// <summary>
-        /// Image of the full document 
+        /// full document image if enabled with returnFullDocumentImage property. 
         /// </summary>
         Xamarin.Forms.ImageSource FullDocumentImage { get; }
         
