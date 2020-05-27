@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(NuGetAuthoringPath)\NuGet.Packaging.Authoring.props" Condition="Exists('$(NuGetAuthoringPath)\NuGet.Packaging.Authoring.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{36E524FC-AC6D-4614-96E8-B974F93609C9}</ProjectGuid>
+    <Description>BlinkInput - a small, but powerful ID scanning library. Use this package in your Xamarin Forms project.</Description>
+    <PackageId>BlinkInput.Forms</PackageId>
+    <PackageVersion>4.3.0</PackageVersion>
+    <Authors>Microblink</Authors>
+    <DevelopmentDependency>false</DevelopmentDependency>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>BlinkInput</RootNamespace>
+    <UsePartialTypes>false</UsePartialTypes>
+    <AssemblyName>BlinkInput.Forms.NuGet</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <Owners>Microblink</Owners>
+    <Copyright>Microblink</Copyright>
+    <Title>BlinkInput</Title>
+    <Summary>BlinkInput - a small, but powerful ID scanning library. Use this package in your Xamarin Forms project.</Summary>
+    <PackageProjectUrl>https://github.com/blinkinput/blinkinput-xamarin</PackageProjectUrl>
+    <PackageReleaseNotes>Updated for BlinkInput Android and iOS SDKs v4.3.0</PackageReleaseNotes>
+    <ReleaseVersion>4.3.0</ReleaseVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <OutputPath>bin\Debug</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BlinkInput.Forms.Android\BlinkInput.Forms.Android.csproj">
+      <Project>{EDDC7CF7-5D2A-40CF-A660-CE81A6580A34}</Project>
+      <Name>BlinkInput.Forms.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlinkInput.Forms.iOS\BlinkInput.Forms.iOS.csproj">
+      <Project>{900DCC9A-2218-440C-BD90-E8CF85C845F1}</Project>
+      <Name>BlinkInput.Forms.iOS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlinkInput.Forms.Core\BlinkInput.Forms.Core.csproj">
+      <Project>{6D449ABF-31CC-4503-B927-165F356BB875}</Project>
+      <Name>BlinkInput.Forms.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="NuGet.Build.Packaging">
+      <Version>0.2.2</Version>
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.Common.targets" />
+  <Import Project="$(NuGetAuthoringPath)\NuGet.Packaging.Authoring.targets" Condition="Exists('$(NuGetAuthoringPath)\NuGet.Packaging.Authoring.targets')" />
+</Project>
