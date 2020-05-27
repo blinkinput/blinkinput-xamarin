@@ -53,6 +53,7 @@ https://github.com/BlinkInput/blinkinput-ios/releases/tag/v5.4.0</PackageRelease
     <BundleResource Include="Microblink.bundle\torchoff_pressed%402x.png" />
     <BundleResource Include="Microblink.bundle\BlinkOCR_Ocr_general_6.1.0.strop" />
     <BundleResource Include="Microblink.bundle\icon-ok-big-selected%402x.png" />
+    <BundleResource Include="Microblink.bundle\BlinkOCR_DocumentDetector_general_6.3.0.strop" />
     <BundleResource Include="Microblink.bundle\icon-skip%402x.png" />
     <BundleResource Include="Microblink.bundle\torchon_pressed.png" />
     <BundleResource Include="Microblink.bundle\icon-ok-big%402x.png" />
@@ -75,7 +76,6 @@ https://github.com/BlinkInput/blinkinput-ios/releases/tag/v5.4.0</PackageRelease
     <BundleResource Include="Microblink.bundle\ic_flash_on.png" />
     <BundleResource Include="Microblink.bundle\arrow.png" />
     <BundleResource Include="Microblink.bundle\ic_flash_on%403x.png" />
-    <BundleResource Include="Microblink.bundle\BlinkOCR_DocumentDetector_general_6.1.0.strop" />
     <BundleResource Include="Microblink.bundle\PPbeep.wav" />
     <BundleResource Include="Microblink.bundle\model_arabic.zzip" />
     <BundleResource Include="Microblink.bundle\take_picture_button%402x.png" />
